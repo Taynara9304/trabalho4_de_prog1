@@ -28,7 +28,7 @@ struct lista_t
 // Cria uma lista vazia.
 // Retorno: ponteiro p/ a lista ou NULL em erro.
 struct lista_t *lista_cria () {
-  lista_t *pLista = malloc(sizeof(struct lista_t));
+  struct lista_t *pLista = malloc(sizeof(struct lista_t));
 
   if (!pLista)
     return NULL;
@@ -44,7 +44,7 @@ struct lista_t *lista_destroi (struct lista_t *lst) {
   if (!lst)
     return NULL;
 
-  struct elemento *aux;
+  struct item_t *aux;
 
   for (int i = 0; i < lst->tamanho; i++) {
     aux = lst->ini;
@@ -67,23 +67,42 @@ int lista_insere (struct lista_t *lst, int item, int pos) {
 
   memset(novo_elemento, 0, sizeof(struct item_t));
 
-  
+  novo_elemento->valor = item;
+
+  if (!lst->tamanho) {
+    lst->ini = novo_elemento;
+    lst->fim = novo_elemento;
+    return ++lst->tamanho;
+
+  /* pode 2 returns ou faço um if grande?*/
+  }
 
   if(pos > lst->tamanho || pos == -1) {
+    lst->fim->prox = novo_elemento;
+    novo_elemento->ant = lst->fim;
+    lst->fim = novo_elemento;
   }
 
   struct item_t *aux = lst->ini;
 
-  for(int i = 0; i < lst->tamanho; i++) {
-    if (i == pos)
-      break;
-    
-    aux = ls
+  int i = 0;
+  
+  while(i < pos) {
+    aux = aux->prox;
+    i++;
   }
 
-  novo_elemento->valor = item;
-  novo_elemento->prox = lst->
-  
+  novo_elemento->prox = aux;
+  novo_elemento->ant = aux->ant;
+
+  if (pos)
+    aux->ant->prox = novo_elemento;
+  else
+    lst->ini = novo_elemento;
+
+  aux->ant = novo_elemento;
+
+  return ++lst->tamanho;
 }
 
 // Retira o item da lista da posição indicada.

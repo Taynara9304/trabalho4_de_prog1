@@ -79,7 +79,7 @@ int main ()
   printf ("Inserindo itens:\n") ;
 
   // insere itens [ 5 6 7 ] no início de l1 e imprime
-  for (int i = 5; i <= 7; i++)
+  /*for (int i = 5; i <= 7; i++)
   {
     printf ("Inserindo %d no início\n", i) ;
     status = lista_insere (l1, i, 0) ;
@@ -261,7 +261,7 @@ int main ()
   l2 = lista_destroi (l2) ;
   printf ("\n") ;
 
-  printf ("Agora falta analisar no Valgrind\n") ;
+  printf ("Agora falta analisar no Valgrind\n") ;*/
 
   return (0) ;
 }
