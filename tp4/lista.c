@@ -191,8 +191,10 @@ int lista_consulta(struct lista_t *lst, int *item, int pos)
 
   struct item_t *aux = lst->ini;
 
-  if (pos >= lst->tamanho || pos == -1)
-  {
+  if (pos >= lst->tamanho)
+    return -1;
+
+  if(pos == -1) {
     *item = lst->fim->valor;
     return lst->tamanho;
   }
@@ -254,7 +256,6 @@ void lista_imprime(struct lista_t *lst)
 
   if (!lst->tamanho)
   {
-    printf(" ");
     return;
   }
 
